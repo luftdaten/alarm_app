@@ -1,0 +1,10 @@
+#dokku config:set xxx on server side
+MAIL: 'test@test.de'
+DOMAIN: 'luftdateninfo.codingcologne.de'
+MAIL_USERNAME: 'aaaa'
+MAIL_PASSWORD: 'bbbb'
+SECRET_KEY_BASE: 'very long string'
+DEV_DB_USER: 'write here your local user'
+DEV_DB_PASS: 'write here your local pass'
+INFLUX_USER: 'write here your influx user'
+INFLUX_PASS: 'write here your influx pass'

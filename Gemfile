@@ -53,9 +53,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   #gem for support the rails panel in google crome extension
   gem 'meta_request'
-
-  #for heroku
-  gem 'heroku'
 end
 
 group :production do

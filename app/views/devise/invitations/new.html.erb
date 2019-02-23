@@ -1,0 +1,22 @@
+<div class="ui container">
+  <div class="ui basic segments">
+    <div class="panel panel-default panel-boundary">
+      <div class="panel-heading">
+        <h2><%= t('.devise.invitations.new.header', :default => 'Set your password') %></h2>
+      </div>
+      <div class="panel-body">
+        <%= form_for(resource, :as => resource_name, :url => invitation_path(resource_name), html: { method: :post, role: "form" }) do |f| %>
+            <%= devise_bootstrap_error_messages! %>
+
+            <% resource.class.invite_key_fields.each do |field| -%>
+                <div class="form-group">
+                  <%= f.label field %>
+                  <%= f.text_field field, class: "form-control" %>
+                </div>
+            <% end -%>
+            <%= f.submit  t("devise.invitations.new.submit_button", :default => "Send an invitation"), class: "ui primary basic button" %>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+de:
+  devise:
+    failure:
+      invited: "Du hast eine offene Einladung. Akzeptiere sie, damit der Account generiert wird"
+    invitations:
+      send_instructions: "Eine Einladung wurde gesendet an %{email}."
+      invitation_token_invalid: "The invitation token provided is not valid!"
+      updated: "Your password was set successfully. You are now signed in."
+      updated_not_active: "Your password was set successfully."
+      no_invitations_remaining: "No invitations remaining"
+      invitation_removed: "Your invitation was removed."
+      new:
+        header: "Send invitation"
+        submit_button: "Send an invitation"
+      edit:
+        header: "Set your password"
+        submit_button: "Set my password"
+    mailer:
+      invitation_instructions:
+        subject: "OpenAir Sensor Anleitung"
+        hello: "Hallo %{email},"
+        someone_invited_you: "Wir laden dich ein, deinen Sensor auf der Openair Webseite zu konfigurieren. Du musst dir ein Passwort vergeben und dich einloggen - dann kannst du den Sensor anlegen."
+        accept: "Einladung akzeptieren"
+        accept_until: "Deine Einladung ist gültig bis %{due_date}."
+        ignore: "Wenn du doch nicht mitmachen willst, muss du nichts weiteres tun.<br />\nDein Account wird erst aktiviert, wenn du dich anmeldest."
+  time:
+    formats:
+      devise:
+        mailer:
+          invitation_instructions:
+            accept_until_format: "%B %d, %Y %I:%M %p"

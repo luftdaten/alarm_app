@@ -1,0 +1,80 @@
+
+<div class="ui basic segment" id="own_sensors">
+<% if current_user.blank? %>
+  <h2>Logge dich ein und erstelle deinen persöhnlichen Sensoralarm</h2>
+  <div id="map"></div>
+<% else %>
+  <%= simple_form_for Notification.new(user_id: current_user.id), html: { class: "ui form"} do |f| %>
+    <div class="ui sub header">Titel des Sensoralarms:</div>
+    <div class="one column row">
+        <div class="column">
+        <%= f.input_field :name, required: true %>
+        </div>
+    </div><br>
+    <div class="one column row">
+      <div class="ui sub header">Wähle die Sensoren auf der Karte:</div>
+      <select id="sensor_select" class="ui fluid dropdown" multiple="" name="notification[sensor_ids][]" required="required">
+      </select>
+    </div><br>
+    <div class="one column row">
+        <div class="left aligned column">
+          <%= f.button :button, '<i class="fa-send icon"></i>Speichern'.html_safe, type: :submit, class:"ui save_button positive button"%>
+        </div>
+    </div>
+  <% end %>
+</div>
+<div class="ui basic segment" id="own_sensors">
+  <div id="map"></div>
+</div>
+<% end %>
+
+
+<script type='text/javascript'>
+  $('#sensor_select').dropdown();
+  if ((navigator.geolocation) && ("<%= Rails.env.development? ? 'dev' : 'production' %>" == "production")) {
+      navigator.geolocation.getCurrentPosition(function(location) {
+        console.log(location.coords.latitude);
+        console.log(location.coords.longitude);
+        console.log(location.coords.accuracy);
+        latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+        init_map(latlng)
+      });
+  } else {
+    latlng = new L.LatLng(48.78, 9.18);
+    init_map(latlng)
+  }
+
+  function add_map(latlng) {
+    var tiles = L.tileLayer("<%= Rails.env.development? ? 'http' : 'https' %>://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 18,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+    var map = new L.Map('map', {center: latlng, zoom: 15, layers: [tiles]});
+    map.scrollWheelZoom.disable();
+    return map;
+  }
+
+  function populate(markers) {
+    var sensors = <%= raw @markers.to_json %>
+
+    for (var i = 0; i < sensors.length; i++) {
+      var m = new L.Marker(new L.LatLng(sensors[i].lat,sensors[i].lng));
+      m.bindPopup("<b>Sensor-ID "+ sensors[i].id+" ("+sensors[i].name+")</b><br><button sensor-add data="+sensors[i].id +">2x  Klicken zum Aktivieren</button>");
+      m.on('click', function(e) {
+        $('[sensor-add]').on('click', function() {
+          $('#sensor_select').dropdown('add optionValue', $(this).attr('data'));
+          $('#sensor_select').dropdown('set selected', $(this).attr('data'));
+        })
+      });
+      markers.addLayer(m);
+    }
+    return markers;
+  }
+
+  function init_map(latlng) {
+    var map = add_map(latlng)
+    var markers = new L.MarkerClusterGroup();
+    map.addLayer(populate(markers));
+  }
+
+</script>

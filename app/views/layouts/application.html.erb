@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+      <title>Luftalarm</title>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ==" crossorigin="" />
+        <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js" integrity="sha512-WXoSHqw/t26DszhdMhOXOkI7qCiv5QWXhH9R7CgvgZMHz1ImlkVQ3uNsiQKu5wwbbxtPzFXd1hK4tzno2VqhpA==" crossorigin=""></script>
+      <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+      <%= csrf_meta_tags %>
+
+    </head>
+    <body>
+
+      <%# Beginn Menuleiste mit App Auswahl%>
+    <div class="ui attached stackable inverted menu roove">
+      <div class="ui dropdown icon item">
+        <i class="fa-crosshairs icon"></i>
+        <div class="menu">
+        </div>
+      </div>
+      <a class="item" href="/">
+        <i class="fa-bookmark icon"></i> Luftdaten Alarm
+      </a>
+      <a class="item" href="/sensors">
+        <i class="map icon"></i>Karte
+      </a>
+      <% if user_signed_in?  %>
+      <a class="item" href="/notifications">
+        <i class="list icon"></i>Meine Benachrichtigungen
+      </a>
+      <a class="item" href="/community">
+        <i class="chat icon"></i>Forum
+      </a>
+      <% end %>
+      <div class="right menu">
+        <% if user_signed_in? %>
+          <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'item') %>
+        <% else %>
+          <%= link_to('Login', new_user_session_path, class: 'item')  %>
+        <% end %>
+      </div>
+    </div>
+
+    <%# Beginn Main Content %>
+
+    <div class="main-container">
+      <div class="ui text container">
+        <div id="flashes" class="column">
+          <div class="ui column stackable middle aligned centered color grid">
+            <% if flash[:notice] %>
+              <div class="green column flash"><%= flash[:notice] %></div>
+            <% end %>
+            <% if flash[:alert] %>
+              <div class="red column flash"><%= flash[:alert] %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <%= yield %>
+    </div>
+
+  <div class="ui inverted vertical footer segment">
+    <div class="ui container">
+      <div class="ui stackable inverted divided equal height stackable grid">
+        <div class="three wide column">
+          <h4 class="ui inverted header"></h4>
+          <div class="ui inverted link list">
+            <a href="<%= impressum_home_index_path%>" class="item"> Impressum</a>
+            <a href="<%= datenschutz_home_index_path%>" class="item"> Datenschutz</a>
+          </div>
+        </div>
+        <div class="three wide column">
+        </div>
+        <div class="seven wide column">
+          <h4 class="ui inverted header"></h4>
+          <p></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </body>
+</html>
+

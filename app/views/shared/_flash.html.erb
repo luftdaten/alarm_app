@@ -1,0 +1,10 @@
+ <div id="flashes" class="column">
+  <% flash.each do |type, message| %>
+    <% if type.to_sym == :notice  %>
+      <div class="green column flash"><%= message %></div>
+    <% end %>
+    <% if type.to_sym == :alert %>
+      <div class="red column flash"><%= message %></div>
+    <% end %>
+<% end %>
+</div>

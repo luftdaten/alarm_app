@@ -1,0 +1,57 @@
+<div class="ui container">
+  <div class="ui basic segments">
+    <div class="panel panel-default panel-boundary">
+      <div class="panel-heading">
+        <h2>Editiere dein Profil</h2>
+      </div>
+      <div class="ui basic segment">
+        <div class="ui form">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, role: "form" }) do |f| %>
+              <%= devise_bootstrap_error_messages! %>
+
+              <div class="form-group">
+                <%= f.label :email %>
+                <%= f.email_field :email, class: "form-control" %>
+              </div>
+
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                <div class="form-group">
+                  Currently waiting confirmation for: <%= resource.unconfirmed_email %>
+                </div>
+              <% end %>
+
+              <div class="form-group">
+                <div class="field">
+                  <%= f.label :password %> <i><small class="text-muted">(leave blank if you don't want to change it)</small></i>
+                  <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+                  <% if @minimum_password_length %>
+                      <small class="form-text text-muted">(<%= @minimum_password_length %> characters minimum)</small>
+                  <% end %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :password_confirmation %>
+                <%= f.password_field :password_confirmation, autocomplete: "off" , class: "form-control"%>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :current_password %> <i><small class="text-muted">(we need your current password to confirm your changes)</small></i>
+                <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
+              </div>
+              <br>
+              <%= f.submit  t('.update', :default => "Update"), class: "ui primary basic button" %>
+          <%end%>
+        </div>
+      </div>
+      <div class="ui basic segment">
+      <h2>Du willst einen weiteren Sensor Konfigurieren?</h2>
+      <%= form_for(Sensor.new, html: { method: :post, role: "form" }) do |f| %>
+          <%= f.submit  'Neuer Sensor anlegen', class: "ui primary basic button" %>
+      <%end%>
+      </div>
+      <br>
+      <p>Du willst an dem Projekt nicht mehr teilnehmen? <%= button_to "Lösche deinen Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+    </div>
+  </div>
+</div>

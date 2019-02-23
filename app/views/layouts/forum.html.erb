@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+      <title>Luftalarm Forum</title>
+
+      <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+      <%= csrf_meta_tags %>
+
+    </head>
+    <body>
+
+      <%# Beginn Menuleiste mit App Auswahl%>
+    <div class="ui attached stackable inverted menu roove">
+      <div class="ui dropdown icon item">
+        <i class="fa-crosshairs icon"></i>
+        <div class="menu">
+        </div>
+      </div>
+      <a class="item" href="/sensors">
+        <i class="list icon"></i>Sensoren
+      </a>
+      <a class="item" href="/community">
+        <i class="list icon"></i>Forum
+      </a>
+
+
+    </div>
+
+    <%# Beginn Main Content %>
+
+    <div class="main-container">
+      <div class="ui text container">
+        <div id="flashes" class="column">
+          <div class="ui column stackable middle aligned centered color grid">
+            <% if flash[:notice] %>
+              <div class="green column flash"><%= flash[:notice] %></div>
+            <% end %>
+            <% if flash[:alert] %>
+              <div class="red column flash"><%= flash[:alert] %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <%= yield %>
+    </div>
+
+  <div class="ui inverted vertical footer segment">
+    <div class="ui container">
+      <div class="ui stackable inverted divided equal height stackable grid">
+        <div class="three wide column">
+          <h4 class="ui inverted header"></h4>
+          <div class="ui inverted link list">
+            <a href="#" class="item"></a>
+          </div>
+        </div>
+        <div class="three wide column">
+        </div>
+        <div class="seven wide column">
+          <h4 class="ui inverted header"></h4>
+          <p></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </body>
+</html>
+

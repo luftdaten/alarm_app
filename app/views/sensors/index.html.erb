@@ -57,13 +57,18 @@
 <script type='text/javascript'>
   $('#sensor_select').dropdown();
   if ((navigator.geolocation) && ("<%= Rails.env.development? ? 'dev' : 'production' %>" == "production")) {
-      navigator.geolocation.getCurrentPosition(function(location) {
+    navigator.geolocation.getCurrentPosition( success, error, { maximumAge: 60000, timeout: 10000 } );
+    function success(location) {
         console.log(location.coords.latitude);
         console.log(location.coords.longitude);
         console.log(location.coords.accuracy);
         latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-        init_map(latlng)
-      });
+        init_map(latlng);
+    };
+    function error(error) {
+      latlng = new L.LatLng(48.78, 9.18);
+      init_map(latlng);
+    };
   } else {
     latlng = new L.LatLng(48.78, 9.18);
     init_map(latlng)

@@ -342,7 +342,6 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
-  activejob (>= 5.1.6.1)
   best_in_place (~> 3.0.1)
   byebug
   chartkick
@@ -352,7 +351,6 @@ DEPENDENCIES
   elastic_email_rails
   eps
   exception_notification
-  ffi (>= 1.9.24)
   figaro
   font-awesome-rails
   groupdate
@@ -365,24 +363,18 @@ DEPENDENCIES
   leaflet-rails (~> 0.7.4)
   letter_opener
   listen (~> 3.0.5)
-  loofah (>= 2.2.3)
   meta_request
   mysql2 (>= 0.3.18, < 0.5)
-  nokogiri (>= 1.8.5)
   pg
   puma (~> 3.0)
-  rack (>= 2.0.6)
   rails (~> 5.1.1)
-  rails-html-sanitizer (>= 1.0.4)
   rails-i18n
   ruby_linear_regression
-  sanitize (>= 4.6.3)
   sass-rails (~> 5.0)
   semantic-ui-sass (= 2.2.4.0)
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
-  sprockets (>= 3.7.2)
   thredded (~> 0.14.1)
   turbolinks (~> 5)
   tzinfo-data

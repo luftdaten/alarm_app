@@ -14,8 +14,8 @@
       <h2>
           Hier kannst Du Sensoren auswählen und zu Listen gruppieren. Damit Du die ausgewählten Sensoren auf der Karte speichern kannst musst dich einloggen oder ein neues Konto registrieren.
         </h2>
-        <button id="ld-primary"class="ui button">Registrierung</button>
-        <button class="ui button">Login</button>
+        <%= link_to('Registrierung', new_user_registration_path, class: 'ui button', id:'ld-primary')  %>
+        <%= link_to('Login', new_user_session_path, class: 'ui button')  %>
       <% end %>
   </div>
 

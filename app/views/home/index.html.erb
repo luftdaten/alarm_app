@@ -8,11 +8,11 @@
     <h1 id="ld-headline" class="ui header">
       Willkommen beim Luftalarm von Luftdaten.info
     </h1>
-    <h2>
+    <p>
         Egal ob Zuhause, bei der Arbeit oder deinem tagtäglichen Fahrweg. Hier kannst Du individuelle Benachrichtigungen über Sensor-Werte einstellen.
-    </h2>
-    <button id="ld-primary"class="ui button">Registrierung</button>
-    <button class="ui button">Login</button>
+    </p>
+      <%= link_to('Registrierung', new_user_registration_path, class: 'ui button', id:'ld-primary')  %>
+      <%= link_to('Login', new_user_session_path, class: 'ui button')  %>
   <% end %>
 </div>
 
@@ -20,6 +20,13 @@
   <i class="tag icon"></i>
   Weiter gehts mit dem Content aller Art...
 </h4>
+
+<div class="ui column stackable middle aligned centered color grid">
+    <a href="https://luftdaten.info" class="ui medium image" target="_blank">
+      <img src="/static/images/feinstaub-sensor.jpg">
+    </a>
+</div>
+
 
 <!-- <div class="ui basic segment" id="own_sensors">
 <% if current_user.blank? %>

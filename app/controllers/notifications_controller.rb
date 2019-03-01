@@ -1,7 +1,9 @@
 class NotificationsController < ApplicationController
   def index
-    #@sensors
-    @notifications = current_user.notifications
+    @notifications = current_user.try(:notifications)
+    if @notifications.blank?
+      redirect_to new_user_session_path, notice: "Erst bitte erst einloggen..."
+    end
   end
 
   def create

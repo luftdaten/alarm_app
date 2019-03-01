@@ -1,0 +1,22 @@
+<div class="ui container">
+  <div class="ui basic segments">
+    <div class="panel panel-default panel-boundary">
+      <div class="panel-heading">
+        <h2>Editiere deinen Namen mit dem wir dich ansprechen:</h2>
+      </div>
+      <div class="ui basic segment">
+        <div class="ui form">
+          <%= form_for(@user, url: user_path, html: { method: :put, role: "form" }) do |f| %>
+              <div class="form-group">
+                <%= "Benutzer Name" %>
+                <%= f.text_field :name, class: "form-control" %>
+              </div>
+
+              <br>
+              <%= f.submit  t('.update', :default => "Update"), class: "ui primary basic button" %>
+          <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

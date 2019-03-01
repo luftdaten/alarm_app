@@ -33,7 +33,7 @@
     <div class="ui sub header">Titel des Sensoralarms:</div>
     <div class="one column row">
         <div class="column">
-        <%= f.input_field :name, required: true %>
+        <%= f.input_field :name, required: true, value: "Mein Sensoralarm" %>
         </div>
     </div><br>
     <div class="one column row">
@@ -74,7 +74,7 @@
       maxZoom: 18,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     });
-    var map = new L.Map('map', {center: latlng, zoom: 15, layers: [tiles]});
+    var map = new L.Map('map', {center: latlng, zoom: 10, layers: [tiles]});
     map.scrollWheelZoom.disable();
     return map;
   }

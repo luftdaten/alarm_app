@@ -32,7 +32,7 @@ namespace :notification do
         end
         mean = sum/notification.sensors.count
         custom_limit_value = notification.limit_value || 50
-        #puts "Mean #{ mean} Limit: #{custom_limit_value}"
+        puts "Mean #{ mean} Limit: #{custom_limit_value}"
         if mean >= custom_limit_value
           deliver_mail(notification, mean) if correct_interval_to_send?(notification)
         end

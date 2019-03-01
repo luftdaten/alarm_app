@@ -24,7 +24,7 @@
         </div>
       </div>
       <a class="item" href="/">
-        <i class="fa-bookmark icon"></i> 
+        <i class="fa-bookmark icon"></i>
         Luftalarm
       </a>
       <% if user_signed_in?  %>
@@ -68,28 +68,25 @@
       </div>
       <%= yield %>
     </div>
-
-  <div class="ui inverted vertical footer segment">
-    <div class="ui container">
-      <div class="ui stackable inverted divided equal height stackable grid">
-        <div class="three wide column">
-          <h4 class="ui inverted header"></h4>
-          <div class="ui inverted link list">
-            <a href="<%= impressum_home_index_path%>" class="item"> Impressum</a>
-            <a href="<%= datenschutz_home_index_path%>" class="item"> Datenschutz</a>
+    <footer class="footer-distributed" style="background-color: green;">
+      <div class="ui text container">
+        <div class="ui stackable inverted divided equal height stackable grid">
+          <div class="three wide column">
+            <h4 class="ui inverted header"></h4>
+            <div class="ui inverted link list">
+              <a href="<%= impressum_home_index_path%>" class="item"> Impressum</a>
+              <a href="<%= datenschutz_home_index_path%>" class="item"> Datenschutz</a>
+            </div>
+          </div>
+          <div class="three wide column">
+          </div>
+          <div class="seven wide column">
+            <h4 class="ui inverted header">&copy; <%= "#{@anbieter.try(:name)} #{Time.now.year}" %></h4>
+            <p></p>
           </div>
         </div>
-        <div class="three wide column">
-        </div>
-        <div class="seven wide column">
-          <h4 class="ui inverted header"></h4>
-          <p></p>
-        </div>
       </div>
-    </div>
-  </div>
-</div>
-
-    </body>
+    </footer>
+  </body>
 </html>
 

@@ -18,9 +18,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :community
+  resources :user
 
-  mount Thredded::Engine => '/forum'
+  #resources :community
+  #mount Thredded::Engine => '/forum'
 
   # below code to fix the active admin issue when table not exists in database as activeadmin tries to load every model.
   # for reference https://github.com/activeadmin/activeadmin/issues/783

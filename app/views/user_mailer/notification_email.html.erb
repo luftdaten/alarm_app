@@ -1,4 +1,9 @@
-Der Grenzwert von <%= @notification.name %> wurde überschritten.
-In den letzten <%= @notification.aggregation_time %> Stunden lag der Durchschnitt bei <%= @mean %> mg/3m ...
+Der Grenzwert von <%= @notification.name %> wurde überschritten.<br>
+<% if @notification.aggregation_time == 1 %>
+In der letzten Stunde
+<% else %>
+In den letzten <%= @notification.aggregation_time %> Stunden
+<% end %>
+ lag der Durchschnitt bei <%= @mean %> mg/3m ...<br><br>
 
-Hier kannst du die Einstellungen ändern: <%= link_to "#{@notification.name} editieren", notification_url(id: @notification.id) %>
+Hier kannst du die Einstellungen ändern: <%= link_to "#{@notification.name} editieren", notifications_url %>

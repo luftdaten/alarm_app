@@ -29,6 +29,6 @@ Rails.application.routes.draw do
   rescue Exception => e
     puts "ActiveAdmin: #{e.class}: #{e}"
   end
-  root :to => 'sensors#index'
+  root :to => 'home#index'
 
 end

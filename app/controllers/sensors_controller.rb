@@ -4,7 +4,6 @@ class SensorsController < ApplicationController
     @sensors = OwnSensor.where.not(latitude: nil, longitude: nil).where(kind: "SDS011")
     @markers = []
     @sensors.each do |s|
-      #@markers << { latlng: [s.latitude, s.longitude], popup: sensor }
       @markers << {
         lat: s.latitude,
         lng: s.longitude,

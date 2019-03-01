@@ -1,7 +1,32 @@
+  <div class="ui hero container">
+      <% if user_signed_in? %>
+        <h1 class="ui header ld-headline">
+            Hallo <%= current_user.email %> <br>
+            willkommen in deinem persönlichen Bereich von Luftalarm!
+        </h1>
+        <h2>
+            Hier kannst Du Sensoren auswählen und zu Listen gruppieren.
+        </h2>
+      <% else %>
+      <h1 class="ui header ld-headline">
+        Richte deinen eigenen Feinstaub-Sensor Alarm ein!
+      </h1>
+      <h2>
+          Hier kannst Du Sensoren auswählen und zu Listen gruppieren. Damit Du die ausgewählten Sensoren auf der Karte speichern kannst musst dich einloggen oder ein neues Konto registrieren.
+        </h2>
+        <button id="ld-primary"class="ui button">Registrierung</button>
+        <button class="ui button">Login</button>
+      <% end %>
+  </div>
+
+<h4 id="ld-primary" class="ui horizontal divider header">
+  <i class="tag icon"></i>
+  *********
+</h4>
 
 <div class="ui basic segment" id="own_sensors">
 <% if current_user.blank? %>
-  <h2>Logge dich ein und erstelle deinen persöhnlichen Sensoralarm</h2>
+  <h2>Wähle Feinstaub-Sensoren auf der Karte aus und stelle deinen eigenen Feinstaub-Alarm ein!</h2>
   <div id="map"></div>
 <% else %>
   <%= simple_form_for Notification.new(user_id: current_user.id), html: { class: "ui form"} do |f| %>

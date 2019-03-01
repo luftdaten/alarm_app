@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-      <title>Luftalarm</title>
+      <title>Luftalarm - dein persönlicher Sensor-Alarm</title>
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ==" crossorigin="" />
         <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js" integrity="sha512-WXoSHqw/t26DszhdMhOXOkI7qCiv5QWXhH9R7CgvgZMHz1ImlkVQ3uNsiQKu5wwbbxtPzFXd1hK4tzno2VqhpA==" crossorigin=""></script>
       <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -18,30 +18,34 @@
     <body>
 
       <%# Beginn Menuleiste mit App Auswahl%>
-    <div class="ui attached stackable inverted menu roove">
+    <div id="ld-primary" class="ui attached stackable inverted menu roove">
       <div class="ui dropdown icon item">
-        <i class="fa-crosshairs icon"></i>
         <div class="menu">
         </div>
       </div>
       <a class="item" href="/">
-        <i class="fa-bookmark icon"></i> Luftdaten Alarm
-      </a>
-      <a class="item" href="/sensors">
-        <i class="map icon"></i>Karte
+        <i class="fa-bookmark icon"></i> 
+        Luftalarm
       </a>
       <% if user_signed_in?  %>
-      <a class="item" href="/notifications">
-        <i class="list icon"></i>Meine Benachrichtigungen
-      </a>
-      <a class="item" href="/community">
-        <i class="chat icon"></i>Forum
-      </a>
+        <a class="item" href="/sensors">
+          <i class="map icon"></i>Meine Sensoren-Karte
+        </a>
+      <% else  %>
+        <a class="item" href="/sensors">
+          <i class="map icon"></i>Sensor-Karte
+        </a>
+      <% end %>
+      <% if user_signed_in?  %>
+        <a class="item" href="/notifications">
+          <i class="list icon"></i>Meine Benachrichtigungen
+        </a>
       <% end %>
       <div class="right menu">
         <% if user_signed_in? %>
           <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'item') %>
         <% else %>
+          <%= link_to('Registrierung', new_user_registration_path, class: 'item')  %>
           <%= link_to('Login', new_user_session_path, class: 'item')  %>
         <% end %>
       </div>

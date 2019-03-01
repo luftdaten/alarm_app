@@ -1,4 +1,5 @@
 class UserMailer < ApplicationMailer
+  include DefaultUrlOptions
   default from: ENV['MAIL']
 
   def notification_email(notification, mean)

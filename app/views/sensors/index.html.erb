@@ -1,12 +1,12 @@
   <div class="ui hero container">
       <% if user_signed_in? %>
-        <h1 class="ui header ld-headline">
-            Hallo <%= current_user.email %> <br>
-            willkommen in deinem persönlichen Bereich von Luftalarm!
-        </h1>
-        <h2>
-            Hier kannst Du Sensoren auswählen und zu Listen gruppieren.
+        <h2 class="ui header ld-headline">
+          Hallo <%= current_user.email %> <br>
+          willkommen in deinem persönlichen Bereich von Luftalarm!
         </h2>
+        <h3>
+          Hier kannst Du Sensoren auswählen und zu Listen gruppieren.
+        <h3>
       <% else %>
       <h1 class="ui header ld-headline">
         Richte deinen eigenen Feinstaub-Sensor Alarm ein!
@@ -21,7 +21,7 @@
 
 <h4 id="ld-primary" class="ui horizontal divider header">
   <i class="tag icon"></i>
-  *********
+  Wenn der Grenzwert dieser Sensoren überschritten wird, bekommst du eine E-Mail Benachrichtigung.
 </h4>
 
 <div class="ui basic segment" id="own_sensors">
@@ -95,8 +95,12 @@
       m.bindPopup("<b>Sensor-ID "+ sensors[i].id+" ("+sensors[i].name+")</b><br> " + get_sensor_problem(sensors[i]) +"<button sensor-add data="+sensors[i].id +">2x  Klicken zum Aktivieren</button>");
       m.on('click', function(e) {
         $('[sensor-add]').on('click', function() {
+          <% if current_user %>
           $('#sensor_select').dropdown('add optionValue', $(this).attr('data'));
           $('#sensor_select').dropdown('set selected', $(this).attr('data'));
+          <% else %>
+          alert("Logge dich ein, um Sensor-"+$(this).attr('data')+" zu tracken");
+          <% end %>
         })
       });
       markers.addLayer(m);

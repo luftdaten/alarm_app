@@ -5,6 +5,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
 
       <title>Luftalarm - dein persönlicher Sensor-Alarm</title>
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ==" crossorigin="" />
@@ -44,6 +45,7 @@
       <% end %>
       <div class="right menu">
         <% if user_signed_in? %>
+          <%= link_to(raw('<i class="fa fa-user"></i>'), edit_user_path(current_user.id), class: 'item') %>
           <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'item') %>
         <% else %>
           <%= link_to('Registrierung', new_user_registration_path, class: 'item')  %>

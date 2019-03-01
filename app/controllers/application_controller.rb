@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
     ActionMailer::Base.default_url_options[:host] = ENV["DOMAIN"] unless Rails.env.development?
   end
 
+  def after_sign_in_path_for(user)
+    sensors_path
+  end
+
   def redirect_url
     return new_patron_session_path unless patron_signed_in?
     case current_patron

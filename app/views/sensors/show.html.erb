@@ -1,0 +1,38 @@
+
+<div class="ui container">
+  <% if not @sensor_chart_data.blank? %>
+  <div class="ui basic segments">
+    <div class="panel panel-default panel-boundary">
+      <div class="ui basic segment">
+        <h2>Sensorwerte</h2>
+        <%= line_chart @sensor_chart_data, ytitle: "PM10 in µg/m3", height: "500px", discrete: true %>
+      </div><br>
+        Hier siehst du die letzten gemessenen 3 Stunden Mittelwerte
+  </div>
+  <% end %><br><br>
+  <div class="ui basic segment">
+    <div class="seven wide column">
+      <h3> Position auf der Karte</h3>
+      <h4>
+      <% if @sensor.try(:latitude).blank? %>
+        Leider nocht keine genaue Position für den Sensor hinterlegt...
+      <% end %>
+      <div id="map" class="ui segment"><div id="map"></div></div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+      var Tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '<a href="https://www.openstreetmap.org" target="_blank">Terms &amp; Feedback</a>'
+      });
+
+      var latitude = <%= @sensor.latitude %>, longitude = <%= @sensor.longitude %>, zoom_level = 14;
+
+      var map = L.map('map').addLayer(Tiles).setView([latitude, longitude], zoom_level);
+      map.scrollWheelZoom.disable();
+      newMarkerGroup = new L.LayerGroup();
+      var marker = new L.marker(["<%= @sensor.latitude %>", "<%= @sensor.longitude %>"]).addTo(map);
+      map.panTo(["<%= @sensor.latitude %>", "<%= @sensor.longitude %>"]);
+
+
+</script>

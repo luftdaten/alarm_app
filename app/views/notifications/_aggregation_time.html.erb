@@ -1,0 +1,37 @@
+<span id="aggregation-time-<%= notification.id %>" class="ui dropdown">
+  <input type="hidden" name="gender">
+  <i class="dropdown icon"></i>
+  <div class="default text">Wähle</div>
+  <div class="menu">
+    <div class="item" data-value="1">eine Stunde</div>
+    <div class="item" data-value="2">zwei Stunden</div>
+    <div class="item" data-value="3">drei Stunden</div>
+    <div class="item" data-value="4">vier Stunden</div>
+    <div class="item" data-value="5">fünf Stunden</div>
+    <div class="item" data-value="6">sechs Stunden</div>
+    <div class="item" data-value="7">sieben Stunden</div>
+    <div class="item" data-value="8">acht Stunden</div>
+    <div class="item" data-value="9">neun Stunden</div>
+    <div class="item" data-value="10">10 Stunden</div>
+  </div>
+</span>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#aggregation-time-<%= notification.id %>').dropdown('set selected', <%= notification.aggregation_time %>);
+    $('#aggregation-time-<%= notification.id %>').dropdown({
+      onChange: function() {
+        var aggregation_time = $(this).dropdown('get value');
+        $.ajax({
+          type: 'PUT',
+          dataType: 'script',
+          url: "<%= notification_path(id: notification.id) %>",
+            data: { notification: {
+              aggregation_time: aggregation_time
+            },
+            authenticity_token: "<%= form_authenticity_token %>"
+          }
+        });
+      }
+    });
+  })
+</script>

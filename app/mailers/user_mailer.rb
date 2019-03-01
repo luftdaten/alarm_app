@@ -1,7 +1,7 @@
 class UserMailer < ApplicationMailer
   default from: ENV['MAIL']
 
-  def sample_email(notification, mean)
+  def notification_email(notification, mean)
     @notification = notification
     @mean = mean
     mail = notification.user.email

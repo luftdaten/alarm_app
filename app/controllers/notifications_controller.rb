@@ -44,7 +44,7 @@ class NotificationsController < ApplicationController
 
   private
   def notification_params
-    params.require(:notification).permit(:enabled,:name)
+    params.require(:notification).permit(:enabled,:name,:aggregation_time,:limit_value,:interval_to_send)
   end
 
 end

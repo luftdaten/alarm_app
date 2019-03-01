@@ -54,12 +54,20 @@
     return map;
   }
 
+  function get_sensor_problem(sensor) {
+    var problem = ""
+    if (sensor.problem != "") {
+      problem = "Problem: <br>" + sensor.problem;
+    }
+    return problem + "<br><br>"
+  }
   function populate(markers) {
     var sensors = <%= raw @markers.to_json %>
 
     for (var i = 0; i < sensors.length; i++) {
       var m = new L.Marker(new L.LatLng(sensors[i].lat,sensors[i].lng));
-      m.bindPopup("<b>Sensor-ID "+ sensors[i].id+" ("+sensors[i].name+")</b><br><button sensor-add data="+sensors[i].id +">2x  Klicken zum Aktivieren</button>");
+
+      m.bindPopup("<b>Sensor-ID "+ sensors[i].id+" ("+sensors[i].name+")</b><br> " + get_sensor_problem(sensors[i]) +"<button sensor-add data="+sensors[i].id +">2x  Klicken zum Aktivieren</button>");
       m.on('click', function(e) {
         $('[sensor-add]').on('click', function() {
           $('#sensor_select').dropdown('add optionValue', $(this).attr('data'));

@@ -4,6 +4,6 @@ In der letzten Stunde
 <% else %>
 In den letzten <%= @notification.aggregation_time %> Stunden
 <% end %>
- lag der Durchschnitt bei <%= @mean %> mg/3m ...<br><br>
+ lag der Durchschnitt bei <%= @mean %> µg/m³ ...<br><br>
 
 Hier kannst du die Einstellungen ändern: <%= link_to "#{@notification.name} editieren", notifications_url %>

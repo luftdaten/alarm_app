@@ -9,7 +9,7 @@
           <th>Name</th>
           <th>Sensor IDs (Link auf Karte)</th>
           <th>Warnung bei Überschreitung des Mittelwertes über (x Stunden)</th>
-          <th>Überschreitung des Mittelwertes von (mg/3m)</th>
+          <th>Überschreitung des Mittelwertes von (µg/m³)</th>
           <th>wenn Abstand zure letzten Benachrichtigung > (Stunden)</th>
           <th></th>
         </tr>
@@ -29,7 +29,7 @@
           <td><%= n.sensors.map {|s| link_to s.extern_db_id, sensor_path(id: s.extern_db_id) }.join(', ').html_safe %></td>
           <td><%= render 'aggregation_time', notification: n %></td>
           <td><%= best_in_place n,
-                :limit_value, :as => :input, class: 'highlight_on_success', place_holder: 50 %> mg/3m</td>
+                :limit_value, :as => :input, class: 'highlight_on_success', place_holder: 50 %> µg/m³</td>
           <td><%= render 'interval_to_send', notification: n %></td>
           <td><%= link_to 'löschen', notification_path(n.id), method: :delete, data: { confirm: 'Die Sensorbenachrichtigung wirklich löschen?' } %></td>
         </tr>

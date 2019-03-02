@@ -79,13 +79,17 @@
             <div class="ui inverted link list">
               <a href="<%= impressum_home_index_path%>" class="item"> Impressum</a>
               <a href="<%= datenschutz_home_index_path%>" class="item"> Datenschutz</a>
+              <a href="https://github.com/luftdaten/alarm_app" class="item"> Github</a>
             </div>
           </div>
           <div class="three wide column">
           </div>
           <div class="seven wide column">
-            <h4 class="ui inverted header">&copy; <%= "#{@anbieter.try(:name)} #{Time.now.year}" %></h4>
-            <p></p>
+            <div class="ui inverted link list">
+              <p><br>
+                <a href="https://github.com/luftdaten/alarm_app/issues" class="item"> Issues und Hilfe</a>
+              </p>
+            </div>
           </div>
         </div>
       </div>

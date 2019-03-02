@@ -7,6 +7,7 @@ namespace :update do
     answer = Net::HTTP.get_response(url)
     if answer.code == "200"
       results = JSON.parse(answer.body).values.last
+      OwnSensor.update_all(problem: nil)
     end
     results.each do |hash|
       extern_id = hash["_id"]

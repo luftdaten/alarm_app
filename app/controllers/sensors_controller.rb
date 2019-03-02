@@ -38,7 +38,7 @@ class SensorsController < ApplicationController
         name: "Sensor-#{@sensor.extern_db_id}",
         data: @sensor_data[0]['values'].
           map.with_index { |data, index|
-            value = data[1] > 0 ? data[1] : nil
+            value = data[1] > 0 ? data[1].to_f.round(2) : nil
             [I18n.localize(DateTime.parse(data[0]).to_time, format: :chart), value]
           }
       }]

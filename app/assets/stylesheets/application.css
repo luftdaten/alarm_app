@@ -17,18 +17,27 @@
  *= require_tree .
  */
 
+
+ /* App.Luftdaten.info Design-Settings */
+
 .ld-primary {
 	color: #16A287
 }
-
 #ld-primary {
 	color: #16A287
 }
 
+
+
+/* GENERAL SETTINGS */
 .main-container {
-  min-height: 1100px;
+  min-height: 1000px;
   padding-top: 80px;
 }
+
+
+
+/* LEAFLET-MAP-Settings */
 
 #map { height: 500px; width: 100%; margin-top: 8xp;}
 #map .ui.segment {

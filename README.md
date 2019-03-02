@@ -52,7 +52,7 @@ rails s
 [![Screenshot der Live-App](https://github.com/luftdaten/alarm_app/raw/master/docs/_static/2019-03-02-startpage.jpg)](https://github.com/luftdaten/alarm_app/raw/master/docs/_static/2019-03-02-startpage.jpg)
 
 
-### Thanks goes to the technical base of the project the openair.cologne app
+### Thanks goes to the technical base of the project the openair.cologne app!
 
 
 

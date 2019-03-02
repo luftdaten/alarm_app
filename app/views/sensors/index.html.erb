@@ -1,6 +1,6 @@
   <div class="ui hero container">
       <% if user_signed_in? %>
-        <h2 class="ui header ld-headline">
+        <h2 class="ui header">
           Hallo <%= current_user.email %> <br>
           willkommen in deinem persönlichen Bereich von Luftalarm!
         </h2>
@@ -8,7 +8,7 @@
           Hier kannst Du Sensoren auswählen und zu Listen gruppieren.
         <h3>
       <% else %>
-      <h1 class="ui header ld-headline">
+      <h1 class="ui header">
         Richte deinen eigenen Feinstaub-Sensor Alarm ein!
       </h1>
       <h2>

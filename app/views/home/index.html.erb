@@ -1,29 +1,50 @@
 <div class="ui container">
   <% if user_signed_in? %>
-    <h1 id="ld-headline" class="ui header">
+    <h1 class="ui header">
       Hallo <%= current_user.email %> <br>
       willkommen in deinem persönlichen Bereich von Luftalarm!
     </h1>
   <% else %>
-    <h1 id="ld-headline" class="ui header">
-      Willkommen beim Luftalarm von Luftdaten.info
+    <h1 class="ui header">
+      Willkommen bei der Feinstaub-Alarm App von Luftdaten.info
     </h1>
-    <p>
+    <h2>
         Egal ob Zuhause, bei der Arbeit oder deinem tagtäglichen Fahrweg. Hier kannst Du individuelle Benachrichtigungen über Sensor-Werte einstellen.
-    </p>
+    </h2>
       <%= link_to('Registrierung', new_user_registration_path, class: 'ui button', id:'ld-primary')  %>
       <%= link_to('Login', new_user_session_path, class: 'ui button')  %>
   <% end %>
+
+
+
+  <h4 id="primary" class="ui horizontal divider header">
+    <i class="tag icon"></i>
+    Betaphase! Jetzt gerne testen...
+  </h4>
+
+
+  <div class="ui basic segment">
+    <h2>Stelle jetzt deinen Feinstaub-Alarm ein!</h2>
+    <img class="ui medium bordered image centered" src="/static/images/map.png">
+  </div>
+
+  <hr>
+
+  <div class="ui basic segment">
+    <h2>
+      Dieses Projekt ist gefördert durch:
+    </h2>
+    <div class="ui grid">
+      <div class="six wide column centered">
+        <img class="ui medium image" src="/static/images/logo-bmbf.svg">
+      </div>
+      <div class="six wide column">
+        <img class="ui medium image" src="/static/images/logo-okfn.svg">
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<h4 id="primary" class="ui horizontal divider header">
-  <i class="tag icon"></i>
-  Betaphase! Jetzt gerne testen...
-</h4>
 
-<div class="ui column stackable middle aligned centered color grid">
-    <a href="<%= sensors_path %>" class="ui medium image">
-      <img src="/static/images/map.png">
-    </a>
-</div>
 

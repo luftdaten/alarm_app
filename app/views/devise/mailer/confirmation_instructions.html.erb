@@ -1,5 +1,12 @@
-<p>Welcome <%= @email %>!</p>
+<h1>Willkommen <%= @email %>!</h1>
+<p>Toll das du dich beim Feinstaub-Alarm unter app.luftdaten.info registriert hast!</p>
 
+<p>Bitte bestätige deine E-Mail-Adresse in dem du unten auf den Link klickst:</p>
+
+<hr>
+
+<h1>Welcome <%= @email %>!</h1>
+<p>Awesome that you signed up for the Particular Matter Notification-App at app.luftdaten.info!</p>
 <p>You can confirm your account email through the link below:</p>
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>

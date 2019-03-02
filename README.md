@@ -1,5 +1,5 @@
-# This is the base of the openair.cologne app
-
+# App.Luftdaten.info App
+## A Particular Matter Notification App
 
 This Rails 5 (5.0.0.1) app integrated:
 
@@ -46,32 +46,32 @@ rails db:create db:migrate db:seed
 rails s
 ```
 
-Admin Panel [admin panel]
 
-normal application [default]
+## Platform already live at: https://app.luftdaten.info
 
-
-#### Credentials to login as admin
-To login as admin you have to start the rails terminal and create one:
-Admin.create(email: 'admin@xyz.com', password: 'MyPassword')
+[![Screenshot der Live-App](https://github.com/luftdaten/alarm_app/raw/master/docs/_static/2019-03-02-startpage.jpg)](https://github.com/luftdaten/alarm_app/raw/master/docs/_static/2019-03-02-startpage.jpg)
 
 
-   [Devise]: <https://github.com/plataformatec/devise>
+### Thanks goes to the technical base of the project the openair.cologne app
 
-   [Active Admin]: <https://github.com/activeadmin/activeadmin>
 
-   [Devise invitable]: <https://github.com/scambra/devise_invitable>
 
-   [semantic ui]: <http://semantic-ui.com>
+[Devise]: <https://github.com/plataformatec/devise>
 
-   [letter opener]: <https://github.com/ryanb/letter_opener>
+[Active Admin]: <https://github.com/activeadmin/activeadmin>
 
-   [exception_notification]: <https://github.com/smartinez87/exception_notification>
+[Devise invitable]: <https://github.com/scambra/devise_invitable>
 
-   [meta_request]: <https://github.com/dejan/rails_panel/tree/master/meta_request>
+[semantic ui]: <http://semantic-ui.com>
 
-   [rails panel]: <https://github.com/dejan/rails_panel>
+[letter opener]: <https://github.com/ryanb/letter_opener>
 
-   [admin panel]: <http://localhost:3000/admin/admins>
+[exception_notification]: <https://github.com/smartinez87/exception_notification>
 
-   [default]: <http://localhost:3000/users/sign_in>
+[meta_request]: <https://github.com/dejan/rails_panel/tree/master/meta_request>
+
+[rails panel]: <https://github.com/dejan/rails_panel>
+
+[admin panel]: <http://localhost:3000/admin/admins>
+
+[default]: <http://localhost:3000/users/sign_in>

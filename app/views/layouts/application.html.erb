@@ -26,7 +26,7 @@
             <img src="/static/images/logo/logo-wort-bildmarke-full-trans.jpg">
           </div>
       </a>
-      <% if user_signed_in?  %>
+      <% if user_signed_in? %>
         <a class="item" href="/sensors">
           <i class="map icon"></i>Meine Sensoren-Karte
         </a>
@@ -35,14 +35,16 @@
           <i class="map icon"></i>Sensor-Karte
         </a>
       <% end %>
-      <% if user_signed_in?  %>
+      <% if user_signed_in? %>
         <a class="item" href="/notifications">
           <i class="list icon"></i>Meine Benachrichtigungen
+        </a>
+        <a class="item" href="<%= edit_user_path(current_user.id) %>">
+          <i class="fa fa-user"></i>&nbsp;Profil
         </a>
       <% end %>
       <div class="right menu">
         <% if user_signed_in? %>
-          <%= link_to(raw('<i class="fa fa-user"></i>'), edit_user_path(current_user.id), class: 'item') %>
           <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'item') %>
         <% else %>
           <%= link_to('Registrierung', new_user_registration_path, class: 'item')  %>
@@ -68,7 +70,7 @@
       </div>
       <%= yield %>
     </div>
-    
+
     <footer class="footer-distributed" style="background-color: #1ABC9C">
         <img class="ui medium image centered" src="/static/images/logo/logo-wort-bildmarke-full-trans.jpg">
     </footer>

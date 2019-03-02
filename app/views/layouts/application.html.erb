@@ -20,14 +20,11 @@
     <body>
 
       <%# Beginn Menuleiste mit App Auswahl%>
-    <div id="ld-primary" class="ui attached stackable inverted menu roove">
-      <div class="ui dropdown icon item">
-        <div class="menu">
-        </div>
-      </div>
+    <div class="ui attached stackable inverted menu roove" style="background-color: #16A287">
       <a class="item" href="/">
-        <i class="fa-bookmark icon"></i>
-        Luftalarm
+        <div class="ui small image">
+            <img src="/static/images/logo/logo-wort-bildmarke-full-trans.jpg">
+          </div>
       </a>
       <% if user_signed_in?  %>
         <a class="item" href="/sensors">
@@ -71,7 +68,7 @@
       </div>
       <%= yield %>
     </div>
-    <footer class="footer-distributed" style="background-color: green;">
+    <footer class="footer-distributed" style="background-color: #16A287">
       <div class="ui text container">
         <div class="ui stackable inverted divided equal height stackable grid">
           <div class="three wide column">
@@ -83,13 +80,24 @@
             </div>
           </div>
           <div class="three wide column">
-          </div>
-          <div class="seven wide column">
             <div class="ui inverted link list">
               <p><br>
                 <a href="https://github.com/luftdaten/alarm_app/issues" class="item"> Issues und Hilfe</a>
               </p>
             </div>
+          </div>
+          <div class="three wide column">
+            <div class="ui inverted link list">
+            </div>
+          </div>
+          <div class="six wide column">
+              <div class="ui inverted link list">
+                    <a href="https://codeforhamburg.org" class="item"> Code for Hamburg</a>
+                    <a href="https://www.codefor.de/koeln/" class="item"> Code for Köln</a>
+                    <a href="https://www.codefor.de/stuttgart/" class="item"> Code for Stuttgart</a>                    
+                    <a href="https://github.com/luftdaten/alarm_app/issues" class="item"> Codefor.de Netzwerk</a>
+                    <a href="https://okfn.de" class="item"> Open Knowledge Foundation DE e.V.</a>
+                </div>
           </div>
         </div>
       </div>

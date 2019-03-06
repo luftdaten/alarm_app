@@ -15,7 +15,14 @@
         </tr>
       </thead>
       <tbody>
+
         <% @notifications.each do |n| %>
+        <% n.sensors.pluck(:problem, :extern_db_id).each do |problem, extern_db_id| %>
+          <% unless problem.blank? %>
+            Dein Sensor mit der ID-<%= extern_db_id %> hat ein Problem (<%= problem %>)
+            Weitere  <%= link_to "Informationen hier.", sensor_path(id: extern_db_id) %>
+          <% end %>
+        <% end %>
         <tr>
           <td class="collapsing">
             <%= best_in_place n,
@@ -26,7 +33,11 @@
           </td>
           <td><%= best_in_place n,
                 :name, :as => :input, class: 'highlight_on_success' %></td>
-          <td><%= n.sensors.map {|s| link_to s.extern_db_id, sensor_path(id: s.extern_db_id) }.join(', ').html_safe %></td>
+          <td>
+            <% n.sensors.pluck(:problem, :extern_db_id).each do |problem, extern_db_id| %>
+              <%= link_to "#{extern_db_id} #{ "(!#{problem})" unless problem.blank?}", sensor_path(id: extern_db_id) %>
+            <% end %>
+          </td>
           <td><%= render 'aggregation_time', notification: n %></td>
           <td><%= best_in_place n,
                 :limit_value, :as => :input, class: 'highlight_on_success', place_holder: 50 %> µg/m³</td>

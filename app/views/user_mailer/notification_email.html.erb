@@ -8,11 +8,17 @@ In den letzten <%= @notification.aggregation_time %> Stunden
 <% end %>
  lag der Durchschnitt bei <%= @mean %> µg/m³ ...<br><br>
 
+<% @notification.sensors.pluck(:problem, :extern_db_id).each do |problem, extern_db_id| %>
+  <% unless problem.blank? %>
+Dein Sensor mit der ID-<%= extern_db_id %> hat ein Problem (<%= problem %>)
+Weitere <%= link_to "Informationen hier.", sensor_path(id: extern_db_id) %>
+  <% end %>
+<% end %>
 
 Hier kannst du die Einstellungen zu deinem Luftalarm ändern: <%= link_to "#{@notification.name} editieren", notifications_url %>
 
-Viele Grüße, 
+Viele Grüße,
 dein Luftalarm-Team aus Stuttgart, Hamburg und Köln
 
 ----
-Mehr Informationen unter Luftdaten.info
+Mehr Informationen unter app.luftdaten.info oder auf luftdaten.info

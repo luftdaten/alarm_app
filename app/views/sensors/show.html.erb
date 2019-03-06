@@ -11,6 +11,9 @@
   </div>
   <% end %><br><br>
   <div class="ui basic segment">
+    <%= "<h3>Der Sensor hat ein Problem:</h3> #{ @sensor_problem }".html_safe unless @sensor_problem.blank? %>
+  </div>
+  <div class="ui basic segment">
     <div class="seven wide column">
       <h3> Position auf der Karte</h3>
       <h4>

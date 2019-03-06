@@ -22,9 +22,13 @@ class SensorsController < ApplicationController
   end
 
   def show
+    if current_user.blank?
+      redirect_to new_user_session_path, notice: "Erst bitte erst einloggen..."
+    end
     @sensor = OwnSensor.joins({sensor_relations: {notification: :user}}).
       where({notifications: { user_id: current_user.id}}).where(extern_db_id: params[:id]).first
     sensor_name = "sensor-#{@sensor.extern_db_id}"
+    @sensor_problem = sensor_problem(@sensor.problem.to_s)
     request = URI.parse("https://openair.cologne.codefor.de/influx_api?u=#{ENV["INFLUX_USER"]}&p=#{ENV["INFLUX_PASS"]}&db=feinstaub&q=SELECT mean(P1) FROM feinstaub WHERE feed = #{quotify(sensor_name)} AND time >= now() - 10d GROUP BY time(3h) fill(-1)")
     @answer = Net::HTTP.get_response(request)
     if @answer.code == "301"

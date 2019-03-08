@@ -1,5 +1,5 @@
 class SensorsController < ApplicationController
-  #skip_before_action :authenticate_request
+  before_action :authenticate_user!, :except => [:index]
   def index #used for display on selection map
     @sensors = OwnSensor.where.not(latitude: nil, longitude: nil).where(kind: "SDS011")
     @markers = []
@@ -22,9 +22,6 @@ class SensorsController < ApplicationController
   end
 
   def show
-    if current_user.blank?
-      redirect_to new_user_session_path, notice: "Erst bitte erst einloggen..."
-    end
     @sensor = OwnSensor.joins({sensor_relations: {notification: :user}}).
       where({notifications: { user_id: current_user.id}}).where(extern_db_id: params[:id]).first
     sensor_name = "sensor-#{@sensor.extern_db_id}"

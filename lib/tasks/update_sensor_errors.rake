@@ -1,7 +1,7 @@
 require 'uri'
 require 'yajl/http_stream'
 namespace :update do
-  desc "send notification PM10"
+  desc "update sensor errors"
   task sensor_errors: :environment do
     url = URI.parse("https://feinstaub.rexfue.de/api/getprobdata")
     answer = Net::HTTP.get_response(url)

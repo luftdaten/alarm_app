@@ -29,10 +29,10 @@
                 :enabled, as: :checkbox,
                 collection: {
                     false: "aus",
-                    true: "aktiv"}, class: 'highlight_on_success' %>
+                    true: "aktiv"}, class: 'green highlight_on_success' %>
           </td>
           <td><%= best_in_place n,
-                :name, :as => :input, class: 'highlight_on_success' %></td>
+                :name, :as => :input, class: 'green highlight_on_success' %></td>
           <td>
             <% n.sensors.pluck(:problem, :extern_db_id).each do |problem, extern_db_id| %>
               <%= link_to "#{extern_db_id} #{ "(!#{problem})" unless problem.blank?}", sensor_path(id: extern_db_id) %>
@@ -40,7 +40,7 @@
           </td>
           <td><%= render 'aggregation_time', notification: n %></td>
           <td><%= best_in_place n,
-                :limit_value, :as => :input, class: 'highlight_on_success', place_holder: 50 %> µg/m³</td>
+                :limit_value, :as => :input, class: 'green highlight_on_success', place_holder: 50 %> µg/m³</td>
           <td><%= render 'interval_to_send', notification: n %></td>
           <td><%= link_to 'löschen', notification_path(n.id), method: :delete, data: { confirm: 'Die Sensorbenachrichtigung wirklich löschen?' } %></td>
         </tr>
@@ -50,7 +50,7 @@
         <tr>
           <th></th>
           <th colspan="6">
-            Beachte, dass wir in der Beta Phase sind... ändere die Werte auf eigene Verantwortung.
+            Du kannst die Werte ändern, indem du die grünen Flächen klickst. Beachte, dass wir in der Beta Phase sind... Ändere die Werte auf eigene Verantwortung. Wir schicken eine Mail Benachrichtigung, wenn der Mittelwert der Sensoren über den gewünschten Zeitraum den Grenzwert überschreitet. Passe den Grenzwert nach deinen Wünschen an. Du kannst rechts auch einstellen, dass du nicht zu oft benachrichtigt wirst, selbst wenn es eine Überschreitung gibt... Wir empfehlen mehrere Sensoren an einem Ort für die Benachrichtigung auszuwählen. Leider kann man die Sensoren noch nicht nachträglich einer Benachrichtiung hinzufügen.
           </th>
         </tr>
       </tfoot>
@@ -59,7 +59,8 @@
   </div>
 </div>
 
+
+
 <script type="text/javascript">
   $(".best_in_place").best_in_place();
-
 </script>

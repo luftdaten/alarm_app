@@ -1,6 +1,13 @@
 
 <div class="ui container">
-  <% if not @sensor_chart_data.blank? %>
+  <% if @sensor_chart_data.blank? %>
+  <div class="ui basic segments">
+    <div class="panel panel-default panel-boundary">
+      <div class="ui basic segment">
+        <h2>Hier sind in Kürze die Sensorwerte des Sensors zu sehen</h2>
+      </div><br>
+  </div>
+  <% else %>
   <div class="ui basic segments">
     <div class="panel panel-default panel-boundary">
       <div class="ui basic segment">

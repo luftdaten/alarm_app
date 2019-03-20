@@ -1,8 +1,8 @@
 <div class="ui container">
   <% if user_signed_in? %>
     <h1 class="ui header">
-      Hallo <%= current_user.email %> <br>
-      willkommen in deinem persönlichen Bereich von Luftalarm!
+      Hallo <%= current_user.name || current_user.email %>, <br>
+      willkommen in deinem persönlichen Bereich.<br>
     </h1>
   <% else %>
     <h1 class="ui header">

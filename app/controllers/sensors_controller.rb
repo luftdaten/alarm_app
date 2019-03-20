@@ -11,7 +11,6 @@ class SensorsController < ApplicationController
         name: s.kind,
         problem: sensor_problem(s.problem.to_s)
       }
-
     end
     respond_to do |format|
       format.html { }

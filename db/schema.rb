@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 201903011172354) do
 
-  create_table "friendly_id_slugs", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "friendly_id_slugs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 201903011172354) do
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
-  create_table "notifications", id: :integer, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "notifications", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.integer "user_id"
     t.boolean "enabled"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 201903011172354) do
     t.integer "interval_to_send", default: 10
   end
 
-  create_table "own_sensors", id: :integer, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "own_sensors", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "kind"
     t.integer "extern_db_id"
     t.string "provider"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 201903011172354) do
     t.string "problem"
   end
 
-  create_table "patrons", id: :integer, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "patrons", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 201903011172354) do
     t.index ["reset_password_token"], name: "index_patrons_on_reset_password_token", unique: true
   end
 
-  create_table "sensor_relations", id: :integer, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "sensor_relations", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "notification_id"
     t.integer "own_sensor_id"
     t.datetime "created_at", null: false
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 201903011172354) do
     t.index ["own_sensor_id", "notification_id"], name: "index_sensor_relations_on_own_sensor_id_and_notification_id", unique: true
   end
 
-  create_table "thredded_categories", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "messageboard_id", null: false
     t.string "name", limit: 191, null: false
     t.string "description"
@@ -106,14 +106,14 @@ ActiveRecord::Schema.define(version: 201903011172354) do
     t.index ["name"], name: "thredded_categories_name_ci"
   end
 
-  create_table "thredded_messageboard_groups", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_messageboard_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "thredded_messageboard_notifications_for_followed_topics", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_messageboard_notifications_for_followed_topics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
     t.bigint "messageboard_id", null: false
     t.string "notifier_key", limit: 90, null: false
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 201903011172354) do
     t.index ["user_id", "messageboard_id", "notifier_key"], name: "thredded_messageboard_notifications_for_followed_topics_unique", unique: true
   end
 
-  create_table "thredded_messageboard_users", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_messageboard_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "thredded_user_detail_id", null: false
     t.bigint "thredded_messageboard_id", null: false
     t.datetime "last_seen_at", null: false
@@ -130,7 +130,7 @@ ActiveRecord::Schema.define(version: 201903011172354) do
     t.index ["thredded_user_detail_id"], name: "fk_rails_06e42c62f5"
   end
 
-  create_table "thredded_messageboards", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_messageboards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", limit: 191, null: false
     t.string "slug", limit: 191
     t.text "description"
@@ -146,21 +146,21 @@ ActiveRecord::Schema.define(version: 201903011172354) do
     t.index ["slug"], name: "index_thredded_messageboards_on_slug"
   end
 
-  create_table "thredded_notifications_for_followed_topics", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_notifications_for_followed_topics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
     t.string "notifier_key", limit: 90, null: false
     t.boolean "enabled", default: true, null: false
     t.index ["user_id", "notifier_key"], name: "thredded_notifications_for_followed_topics_unique", unique: true
   end
 
-  create_table "thredded_notifications_for_private_topics", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_notifications_for_private_topics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
     t.string "notifier_key", limit: 90, null: false
     t.boolean "enabled", default: true, null: false
     t.index ["user_id", "notifier_key"], name: "thredded_notifications_for_private_topics_unique", unique: true
   end
 
-  create_table "thredded_post_moderation_records", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_post_moderation_records", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "post_id"
     t.bigint "messageboard_id"
     t.text "post_content"
@@ -173,7 +173,7 @@ ActiveRecord::Schema.define(version: 201903011172354) do
     t.index ["messageboard_id", "created_at"], name: "index_thredded_moderation_records_for_display"
   end
 
-  create_table "thredded_posts", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
     t.text "content"
     t.string "ip"
@@ -191,7 +191,7 @@ ActiveRecord::Schema.define(version: 201903011172354) do
     t.index ["user_id"], name: "index_thredded_posts_on_user_id"
   end
 
-  create_table "thredded_private_posts", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_private_posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
     t.text "content"
     t.bigint "postable_id", null: false
@@ -200,7 +200,7 @@ ActiveRecord::Schema.define(version: 201903011172354) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "thredded_private_topics", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_private_topics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
     t.bigint "last_user_id"
     t.string "title", null: false
@@ -214,7 +214,7 @@ ActiveRecord::Schema.define(version: 201903011172354) do
     t.index ["slug"], name: "index_thredded_private_topics_on_slug"
   end
 
-  create_table "thredded_private_users", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_private_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "private_topic_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
@@ -223,14 +223,14 @@ ActiveRecord::Schema.define(version: 201903011172354) do
     t.index ["user_id"], name: "index_thredded_private_users_on_user_id"
   end
 
-  create_table "thredded_topic_categories", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_topic_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "topic_id", null: false
     t.bigint "category_id", null: false
     t.index ["category_id"], name: "index_thredded_topic_categories_on_category_id"
     t.index ["topic_id"], name: "index_thredded_topic_categories_on_topic_id"
   end
 
-  create_table "thredded_topics", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_topics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
     t.bigint "last_user_id"
     t.string "title", null: false
@@ -253,7 +253,7 @@ ActiveRecord::Schema.define(version: 201903011172354) do
     t.index ["user_id"], name: "index_thredded_topics_on_user_id"
   end
 
-  create_table "thredded_user_details", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_user_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
     t.datetime "latest_activity_at"
     t.integer "posts_count", default: 0
@@ -268,7 +268,7 @@ ActiveRecord::Schema.define(version: 201903011172354) do
     t.index ["user_id"], name: "index_thredded_user_details_on_user_id", unique: true
   end
 
-  create_table "thredded_user_messageboard_preferences", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_user_messageboard_preferences", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
     t.bigint "messageboard_id", null: false
     t.boolean "follow_topics_on_mention", default: true, null: false
@@ -278,7 +278,7 @@ ActiveRecord::Schema.define(version: 201903011172354) do
     t.index ["user_id", "messageboard_id"], name: "thredded_user_messageboard_preferences_user_id_messageboard_id", unique: true
   end
 
-  create_table "thredded_user_post_notifications", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_user_post_notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
     t.bigint "post_id", null: false
     t.datetime "notified_at", null: false
@@ -286,7 +286,7 @@ ActiveRecord::Schema.define(version: 201903011172354) do
     t.index ["user_id", "post_id"], name: "index_thredded_user_post_notifications_on_user_id_and_post_id", unique: true
   end
 
-  create_table "thredded_user_preferences", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_user_preferences", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
     t.boolean "follow_topics_on_mention", default: true, null: false
     t.boolean "auto_follow_topics", default: false, null: false
@@ -295,7 +295,7 @@ ActiveRecord::Schema.define(version: 201903011172354) do
     t.index ["user_id"], name: "index_thredded_user_preferences_on_user_id", unique: true
   end
 
-  create_table "thredded_user_private_topic_read_states", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_user_private_topic_read_states", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
     t.bigint "postable_id", null: false
     t.integer "page", default: 1, null: false
@@ -303,7 +303,7 @@ ActiveRecord::Schema.define(version: 201903011172354) do
     t.index ["user_id", "postable_id"], name: "thredded_user_private_topic_read_states_user_postable", unique: true
   end
 
-  create_table "thredded_user_topic_follows", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_user_topic_follows", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
     t.bigint "topic_id", null: false
     t.datetime "created_at", null: false
@@ -311,7 +311,7 @@ ActiveRecord::Schema.define(version: 201903011172354) do
     t.index ["user_id", "topic_id"], name: "thredded_user_topic_follows_user_topic", unique: true
   end
 
-  create_table "thredded_user_topic_read_states", id: :bigint, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_user_topic_read_states", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
     t.bigint "postable_id", null: false
     t.integer "page", default: 1, null: false

@@ -1,8 +1,8 @@
   <div class="ui hero container">
       <% if user_signed_in? %>
         <h2 class="ui header">
-          Hallo <%= current_user.email %> <br>
-          willkommen in deinem persönlichen Bereich von Luftalarm!
+          Hallo <%= current_user.name || current_user.email %>, <br>
+          willkommen in deinem persönlichen Bereich!
         </h2>
         <h3>
           Hier kannst Du Sensoren auswählen und zu Listen gruppieren.
@@ -29,24 +29,31 @@
   <h2>Wähle Feinstaub-Sensoren auf der Karte aus und stelle deinen eigenen Feinstaub-Alarm ein!</h2>
   <div id="map"></div>
 <% else %>
-  <%= simple_form_for Notification.new(user_id: current_user.id), html: { class: "ui form"} do |f| %>
-    <div class="ui sub header">Titel des Sensoralarms:</div>
-    <div class="one column row">
-        <div class="column">
-        <%= f.input_field :name, required: true, value: "Mein Sensoralarm" %>
-        </div>
-    </div><br>
-    <div class="one column row">
-      <div class="ui sub header">Wähle die Sensoren auf der Karte:</div>
-      <select id="sensor_select" class="ui fluid dropdown" multiple="" name="notification[sensor_ids][]" required="required">
-      </select>
-    </div><br>
-    <div class="one column row">
-        <div class="left aligned column">
-          <%= f.button :button, '<i class="fa-send icon"></i>Speichern'.html_safe, type: :submit, class:"ui save_button positive button"%>
-        </div>
+  <div class="ui equal width grid kontaktanfrage">
+
+    <div class="row">
+      <div class="twelve wide mobile six wide tablet six wide computer column ">
+        <%= simple_form_for Notification.new(user_id: current_user.id), html: { class: "ui form  form equal width"} do |f| %>
+          <div class="ui sub header">Titel des Sensoralarms:</div>
+          <div class="one column row">
+              <div class="column">
+                <input required class="string required" aria-required="true" placeholder="Benenne deinen Sensoralarm (Ort, Gruppe, ...)" type="text" name="notification[name]" id="notification_name">
+              </div>
+          </div><br>
+          <div class="one column row">
+            <div class="ui sub header">Wähle die Sensoren auf der Karte:</div>
+            <select id="sensor_select" class="ui fluid dropdown" multiple="" name="notification[sensor_ids][]" required>
+            </select>
+          </div><br>
+          <div class="one column row">
+            <div class="left aligned column">
+              <%= f.button :button, '<i class="fa-send icon"></i>Speichern'.html_safe, type: :submit, name: :commit, class:"ui save_button positive button"%>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
-  <% end %>
+  </div>
 </div>
 <div class="ui basic segment" id="own_sensors">
   <div id="map"></div>
@@ -91,18 +98,26 @@
     }
     return problem + "<br><br>"
   }
+  function get_popup_content(sensor, button_text) {
+    return "<b>Sensor-ID "+ sensor.id+" ("+sensor.name+")</b><br> " + get_sensor_problem(sensor) +"<button sensor-add data="+sensor.id+">"+button_text+"</button>"
+  }
   function populate(markers) {
     var sensors = <%= raw @markers.to_json %>
 
     for (var i = 0; i < sensors.length; i++) {
       var m = new L.Marker(new L.LatLng(sensors[i].lat,sensors[i].lng));
-
-      m.bindPopup("<b>Sensor-ID "+ sensors[i].id+" ("+sensors[i].name+")</b><br> " + get_sensor_problem(sensors[i]) +"<button sensor-add data="+sensors[i].id +">2x  Klicken zum Aktivieren</button>");
+      m.bindPopup(get_popup_content(sensors[i], "2x  Klicken zum Aktivieren"));
       m.on('click', function(e) {
         $('[sensor-add]').on('click', function() {
           <% if current_user %>
           $('#sensor_select').dropdown('add optionValue', $(this).attr('data'));
           $('#sensor_select').dropdown('set selected', $(this).attr('data'));
+          var $button = $('[data="'+$(this).attr('data')+'"]');
+          if ($button.html() == 'noch einmal...') {
+            $button.html('Hinzugefügt');
+          } else {
+            $button.html('noch einmal...');
+          }
           <% else %>
           alert("Logge dich ein, um Sensor-"+$(this).attr('data')+" zu tracken");
           <% end %>
@@ -115,8 +130,34 @@
 
   function init_map(latlng) {
     var map = add_map(latlng)
-    var markers = new L.MarkerClusterGroup();
+    var markers = new L.MarkerClusterGroup({
+      iconCreateFunction: function (cluster) {
+	      var childCount = cluster.getChildCount();
+				return L.divIcon({ html: '<div><span>' + childCount + '</span><span class="label"> Sensoren</span></div>', className: 'marker-cluster sensor-cluster', iconSize: L.point(80, 80) });
+			}
+    });
     map.addLayer(populate(markers));
   }
+
+  function fixPreventEvent(e){
+    if (e.preventDefault) { e.preventDefault() }
+    else { e.stop() };
+    e.returnValue = false;
+    e.stopPropagation();
+  }
+  $('.save_button').on('click', function() {
+    fixPreventEvent(event);
+    var selected = $('#sensor_select').dropdown('get value');
+    if (($('#notification_name').val().length == 0) || (selected.length == 1)) {
+      alert('Bitte einen Titel vergeben und Sensoren wählen');
+    } else {
+      $(this).unbind('click');
+      $(this).addClass('sending');
+      if (!$(this).hasClass('sending')) {
+        $(this).submit();
+        $('.save_button').click();
+      }
+    }
+  })
 
 </script>

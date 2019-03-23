@@ -27,10 +27,16 @@ namespace :notification do
       notifications.each do |notification|
         sum = 0
         mean = 0
+        counter = 0
         notification.sensors.each do |sensor|
-          sum += sensor_results["sensor-#{sensor.extern_db_id}"].to_i
+          sensor_value = sensor_results["sensor-#{sensor.extern_db_id}"].to_i
+          if not sensor_value == 0 #exclude sensors w/o messurement
+            sum += sensor_value
+            counter += 1
+          end
         end
-        mean = sum/notification.sensors.count
+        puts counter, notification.sensors.count
+        mean = sum/counter unless counter == 0
         custom_limit_value = notification.limit_value || 50
         puts "Mean #{ mean} Limit: #{custom_limit_value}"
         if mean >= custom_limit_value

@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
-ruby '2.3.3'
+ruby '2.5.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.1'
+gem 'rails', '~> 5.2.4.3'
 
 # Use Puma as the app server
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 3.12.6'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -16,7 +16,7 @@ gem 'coffee-rails', '~> 4.2'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '>= 4.3.4'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 # for user authentication
-gem 'devise'
+gem 'devise', '>= 4.7.1'
 
 # invitation model integrated
 gem 'devise_invitable'
@@ -82,13 +82,15 @@ gem 'rails-i18n'
 gem 'kaminari-i18n'
 
 gem 'ruby_linear_regression'
-gem "chartkick"
+gem "chartkick", '=3.4.0'
 gem 'groupdate'
 gem 'histogram'
 gem 'eps'
+gem 'kramdown', '>= 2.3.0'
+gem 'kaminari', '>= 1.2.1'
 
 gem 'leaflet-markercluster-rails'
 gem 'yajl-ruby'
 
-gem 'simple_form'
+gem 'simple_form', '>= 5.0'
 gem 'best_in_place', '~> 3.0.1'

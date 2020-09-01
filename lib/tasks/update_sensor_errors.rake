@@ -3,6 +3,7 @@ require 'yajl/http_stream'
 namespace :update do
   desc "update sensor errors"
   task sensor_errors: :environment do
+    OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE #no good idea, but working
     url = URI.parse("https://feinstaub.rexfue.de/api/getprobdata")
     answer = Net::HTTP.get_response(url)
     if answer.code == "200"
